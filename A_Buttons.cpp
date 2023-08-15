@@ -32,27 +32,18 @@ istream &operator>>(istream &is, vector<T> &intermediate_array)
 
 void solve()
 {
-    int n;
-    cin>>n;
-    int l=n*(n-1)/2;
-    int arr[l];
-    map<int,int> mp;
-    int m=-INT_MAX;
-    for(int i=0;i<l;i++){
-        cin>>arr[i];
-        mp[arr[i]]++;
-        m=max(m,arr[i]);
+    long long int a,b,c;
+    cin>>a>>b>>c;
+    if(a>b){
+        cout<<"First"<<"\n";
     }
-    int c=n-1;
-    vector<int> res;
-    for(auto i:mp){
-        while(i.second!=0){
-            cout<<i.first<<" ";
-            i.second-=c;
-            c--;
-        }
+    else if(b>a){
+        cout<<"Second\n";
     }
-    cout<<m<<"\n";
+    else{
+        if(c%2)cout<<"First\n";
+        else cout<<"Second\n";
+    }
 }
 int main()
 {

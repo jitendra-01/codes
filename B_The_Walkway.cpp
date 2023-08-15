@@ -32,27 +32,35 @@ istream &operator>>(istream &is, vector<T> &intermediate_array)
 
 void solve()
 {
-    int n;
-    cin>>n;
-    int l=n*(n-1)/2;
-    int arr[l];
-    map<int,int> mp;
-    int m=-INT_MAX;
-    for(int i=0;i<l;i++){
+    int n,m,d;
+    cin>>n>>m>>d;
+    int arr[m+2];
+    arr[0]=1;
+    for(int i=1;i<=m;i++){
         cin>>arr[i];
-        mp[arr[i]]++;
-        m=max(m,arr[i]);
     }
-    int c=n-1;
-    vector<int> res;
-    for(auto i:mp){
-        while(i.second!=0){
-            cout<<i.first<<" ";
-            i.second-=c;
-            c--;
+    arr[m+1]=n;
+    int temp[m+1];
+    long long int ans=0,sum=0;
+    for(int i=1;i<=m;i++){
+        long long int in,last;
+        if(i!=m){
+            last=(arr[i+1]-arr[i-1]-1)/d;
+            in=((arr[i]-arr[i-1]-1)/d)+((arr[i+1]-arr[i]-1)/d)+1;
         }
+        if(i==m){
+            last=(arr[i+1]-arr[i-1])/d;
+            in=((arr[i]-arr[i-1]-1)/d)+((arr[i+1]-arr[i])/d)+1;
+        }
+        if(last<in && arr[i]!=1 )ans++;
+        sum+=((arr[i]-arr[i-1]-1)/d)+1;
     }
-    cout<<m<<"\n";
+    if(arr[1]!=1)sum+=1;
+    sum+=(arr[m+1]-arr[m])/d;
+    if(ans>0)
+        cout<<sum-1<<" "<<ans<<"\n";
+    else 
+        cout<<sum<<" "<<m<<"\n";
 }
 int main()
 {

@@ -34,49 +34,22 @@ void solve()
 {
     int n;
     cin>>n;
-    vector<vector<int>> a;
-    for(int i=0;i<n;i++){
-        int m;
-        cin>>m;
-        vector<int> t;
-        for(int j=0;j<m;j++){
-            int x;
-            cin>>x;
-            t.push_back(x);
-        }
-        a.push_back(t);
-    }
-    int s=INT_MAX;
-    vector<int> l;
-    for(int i=0;i<n;i++){
-        int l1,l2;
-        if(a[i][0]>a[i][1]){
-            l1=a[i][1];
-            l2=a[i][0];
-        }
-        else{
-            l2=a[i][1];
-            l1=a[i][0];
-        }
-        s=min(s,min(a[i][0],a[i][1]));
-        for(int j=2;j<a[i].size();j++){
-            s=min(a[i][j],s);
-            if(l1>a[i][j]){
-                l2=l1;
-                l1=a[i][j];
-            }
-            else if(l2>a[i][j]){
-                l2=a[i][j];
+    map<int,int> mp;
+    mp[1]++;
+    int i=2;
+    cout<<1<<" ";
+    while(i<=n){
+        if(mp.find(i)==mp.end()){
+            int j=i;
+            while(j<=n){
+                cout<<j<<" ";
+                mp[j]++;
+                j*=2;
             }
         }
-        l.push_back(l2);
+        i++;
     }
-    sort(l.begin(),l.end());
-    long long int ans=s;
-    for(int i=1;i<n;i++){
-        ans+=l[i];
-    }
-    cout<<ans<<"\n";
+    cout<<"\n";
 }
 int main()
 {
